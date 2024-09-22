@@ -2,74 +2,81 @@
 //Handles login
 session_start();
 
-//Check if user is already logged in
-if(isset($_SESSION['username'])){
-    if($_SESSION["admin"]=='YES'){
+// Check if user is already logged in
+if (isset($_SESSION['username'])) {
+    if ($_SESSION["admin"] == 'YES') {
         header("location: sales.php");
-    }
-    else{
+    } else {
         header("location: index.php");
     }
     exit();
 }
 
-require_once "config.php";
+require_once "config.php"; // Assume this file contains the database connection $conn
 
 $username = $password = "";
 $uerr = $perr = "";
 
-if($_SERVER['REQUEST_METHOD']=="POST"){
-    if(empty(trim($_POST['username'])) || empty(trim($_POST['password']))){
-        $uerr = "Please enter both username and password";
-    }
-    else{
+// Process the form when submitted
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    // Check if username and password are not empty
+    if (empty(trim($_POST['username'])) || empty(trim($_POST['password']))) {
+        $uerr = "Please enter both username and password.";
+    } else {
         $username = trim($_POST['username']);
         $password = trim($_POST['password']);
-        $sql = "SELECT id, fullname, email, username, password, admin FROM loginform WHERE username = ?";
-        $q = mysqli_query($conn, $sql);
-        if(!$q){
-            $uerr = "An account with that username does not exist";
-        }
-    }
-}
-if(empty($err)){
-    $sql = "SELECT id, fullname, email, username, password, admin, created_at FROM loginform WHERE username = ?";
-    $stmt = mysqli_prepare($conn, $sql);
-    
-    mysqli_stmt_bind_param($stmt, "s", $param_username);
-    $param_username = $username;
-    //Try to execute this statement
-    if(mysqli_stmt_execute($stmt)){
-        mysqli_stmt_store_result($stmt);
-        if(mysqli_stmt_num_rows($stmt) == 1){
-            mysqli_stmt_bind_result($stmt, $id, $fullname, $email, $username, $hashed_password, $admin, $created_at);
-            if(mysqli_stmt_fetch($stmt)){
-                if(password_verify($password, $hashed_password)){
-                    //Password is correct. Allow user to login
-                    session_start();
-                    $_SESSION["username"] = $username;
-                    $_SESSION["fullname"] = $fullname;
-                    $_SESSION["email"] = $email;
-                    $_SESSION["id"] = $id;
-                    $_SESSION["loggedin"] = true;
-                    //Redirect the user to the accountInfo page
-                    $_SESSION["admin"] = $admin;
-                    $_SESSION["created_at"] = $created_at;
-                    if($_SESSION["admin"]=='YES'){
-                        header("location: sales.php");
-                    }
-                    else{
-                        header("location: index.php");
-                    }
-                }
-                else{
-                    $perr = "Incorrect password";
-                }
-            }
-        }
-    }
-}
 
+        // Prepare SQL statement
+        $sql = "SELECT id, fullname, email, username, password, admin FROM loginform WHERE username = ?";
+        if ($stmt = mysqli_prepare($conn, $sql)) {
+            // Bind the username parameter
+            mysqli_stmt_bind_param($stmt, "s", $param_username);
+            $param_username = $username;
+
+            // Execute the statement
+            if (mysqli_stmt_execute($stmt)) {
+                // Store result
+                mysqli_stmt_store_result($stmt);
+
+                // Check if username exists
+                if (mysqli_stmt_num_rows($stmt) == 1) {
+                    // Bind the result variables
+                    mysqli_stmt_bind_result($stmt, $id, $fullname, $email, $username, $hashed_password, $admin);
+                    if (mysqli_stmt_fetch($stmt)) {
+                        // Verify the password
+                        if (password_verify($password, $hashed_password)) {
+                            // Password is correct. Start a new session and set session variables
+                            session_start();
+                            $_SESSION["username"] = $username;
+                            $_SESSION["fullname"] = $fullname;
+                            $_SESSION["email"] = $email;
+                            $_SESSION["id"] = $id;
+                            $_SESSION["loggedin"] = true;
+                            $_SESSION["admin"] = $admin;
+
+                            // Redirect the user based on their admin status
+                            if ($admin == 'YES') {
+                                header("location: sales.php");
+                            } else {
+                                header("location: index.php");
+                            }
+                        } else {
+                            $perr = "Incorrect password.";
+                        }
+                    }
+                } else {
+                    $uerr = "An account with that username does not exist.";
+                }
+            } else {
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    }
+}
+// Close connection
+mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
@@ -86,7 +93,7 @@ if(empty($err)){
     <nav class="nav-container">
         <ul>
             <ul>
-                <li class="brand"><img src="Assets/logo.png" alt="Music">King Of Burgers</li>
+                <li class="brand"><img src="Assets/logo2.png" alt="Burger">King Of Burgers</li>
             </ul>
             <ul class="right-ul">
                 <li><a href="index.php">Home</a></li>
@@ -100,16 +107,16 @@ if(empty($err)){
             <section class="login-page">
                 <div class="login-input">
                     <div class="login-details">
-                        <label for="username">Username</label> <span style="color:red;"><?php echo $uerr;?></span>
+                        <label for="username">Username</label> <span style="color:red;"><?php echo $uerr; ?></span>
                         <input type="text" name="username" id="username">
                     </div>
-                    <div class="login-details"> <span style="color:red;"><?php echo $perr;?></span>
-                        <label for="password">Password</label>
+                    <div class="login-details">
+                        <label for="password">Password</label> <span style="color:red;"><?php echo $perr; ?></span>
                         <input type="password" name="password" id="password">
                     </div>
                 </div>
                 <div class="login-btn">
-                    <button>Login</button>
+                    <button type="submit">Login</button>
                 </div>
             </section>
         </form>

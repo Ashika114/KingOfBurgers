@@ -46,21 +46,63 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $price = $_POST['price'];
         $discountedPrice = $_POST['discountedPrice'];
         $itemType = $_POST['itemType'];
+        
+        // File upload handling
+        $target_dir = "uploads/";
+        $target_file = $target_dir . basename($_FILES["file"]["name"]);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-        // Prepare an SQL statement to prevent SQL injection
-        $stmt = $conn->prepare("INSERT INTO fooditems (itemName, price, discountedPrice, itemType) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $itemName, $price, $discountedPrice, $itemType);
-
-        if ($stmt->execute()) {
-            echo "<script>
-                alert('New food item added successfully!');
-                window.location.href = 'burgers.php';
-            </script>";
+        // Check if image file is a actual image or fake image
+        $check = getimagesize($_FILES["file"]["tmp_name"]);
+        if ($check !== false) {
+            $uploadOk = 1;
         } else {
-            echo "Error adding food item: " . $stmt->error;
+            echo "File is not an image.";
+            $uploadOk = 0;
         }
 
-        $stmt->close();
+        // Check if file already exists
+        if (file_exists($target_file)) {
+            echo "Sorry, file already exists.";
+            $uploadOk = 0;
+        }
+
+        // Check file size (2MB limit)
+        if ($_FILES["file"]["size"] > 2000000) {
+            echo "Sorry, your file is too large.";
+            $uploadOk = 0;
+        }
+
+        // Allow certain file formats
+        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+            $uploadOk = 0;
+        }
+
+        // Check if $uploadOk is set to 0 by an error
+        if ($uploadOk == 0) {
+            echo "Sorry, your file was not uploaded.";
+        } else {
+            if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
+                // Prepare an SQL statement to prevent SQL injection
+                $stmt = $conn->prepare("INSERT INTO fooditems (itemName, price, discountedPrice, itemType, filePath) VALUES (?, ?, ?, ?, ?)");
+                $stmt->bind_param("sssss", $itemName, $price, $discountedPrice, $itemType, $target_file);
+
+                if ($stmt->execute()) {
+                    echo "<script>
+                        alert('New food item added successfully!');
+                        window.location.href = 'burgers.php';
+                    </script>";
+                } else {
+                    echo "Error adding food item: " . $stmt->error;
+                }
+
+                $stmt->close();
+            } else {
+                echo "Sorry, there was an error uploading your file.";
+            }
+        }
     }
 }
 ?>
@@ -74,12 +116,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Online Burger Ordering System</title>
     <link rel="icon" href="Assets/logo.png">
     <link rel="stylesheet" href="style.css">
-    
 </head>
 <body>
     <nav class="nav-container">
         <ul>
-            <li class="brand"><img src="Assets/logo.png" alt="Music">King Of Burgers</li>
+            <li class="brand"><img src="Assets/logo2.png" alt="Burger">King Of Burgers</li>
             <ul class="right-ul">
                 <li><a href="index.php">Home</a></li>
                 <li><a href="sales.php">Sales</a></li>
@@ -91,12 +132,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </nav>
     
     <div class="container" style="display: flex; flex-direction: column; justify-content: space-between; align-items: flex-end;">
-        <div class="add-food-item" style= "margin-top: 80px; width: 180px;"> 
+        <div class="add-food-item" style="margin-top: 80px; width: 180px;"> 
             <button id="openModal">Add New Food Item</button>
         </div>
-        <form method="POST" action="">
+        <form method="POST" action="" enctype="multipart/form-data">
             <div class="food-items">
-            
                 <?php
                 foreach ($foodItems as $itemName => $items) {
                     // Display the item name once
@@ -107,9 +147,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     
                     foreach ($items as $item) {
                         $itemClass = ($item['itemType'] === 'Non-Veg') ? 'read' : 'green';
-                        echo '<li class="' . $itemClass . '">';
-                        echo 'Price: Rs. <input type="number" name="food[' . $item['id'] . '][price]" value="' . htmlspecialchars($item['price']) . '" min="0" required>';
-                        echo '  Discounted Price: Rs. <input type="number" name="food[' . $item['id'] . '][discountedPrice]" value="' . htmlspecialchars($item['discountedPrice']) . '" min="0" required>';
+                        echo '<li class="' . $itemClass . '" style="display: flex; align-items: center;">';
+                    
+                        // Display the image if it exists
+                        if (!empty($item['filePath'])) {
+                            echo '<img src="' . htmlspecialchars($item['filePath']) . '" alt="' . htmlspecialchars($item['itemName']) . '" style="width: 80px; height: auto; margin-right: 10px;">';
+                        } else {
+                            echo '<span>No image available</span>';
+                        }
+                        
+                        echo 'Price: Rs. <input type="number" name="food[' . $item['id'] . '][price]" value="' . htmlspecialchars($item['price']) . '" min="0" required style="margin-right: 10px;">';
+                        echo 'Discounted Price: Rs. <input type="number" name="food[' . $item['id'] . '][discountedPrice]" value="' . htmlspecialchars($item['discountedPrice']) . '" min="0" required>';
                         echo '</li>';
                     }
                     
@@ -123,14 +171,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             </div>
         </form>
-
     </div>
 
     <div id="foodItemModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2 style="margin-bottom: 10px;">Add New Food Item</h2>
-            <form method="POST" action="">
+            <form method="POST" action="" enctype="multipart/form-data">
                 <table style="border-collapse: collapse; width: 100%;">
                     <tr>
                         <td style="padding: 10px;"><label for="itemName">Item Name:</label></td>
@@ -153,6 +200,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </select>
                         </td>
                     </tr>
+                    <tr>
+                        <td style="padding: 10px;"><label for="file">Upload File:</label></td>
+                        <td style="padding: 10px;"><input type="file" name="file" accept="image/*" required></td>
+                    </tr>
                 </table>
                 <div style="text-align: center; margin-top: 15px;">
                     <button type="submit" name="addFoodItem">Add Food Item</button>
@@ -160,8 +211,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </form>
         </div>
     </div>
-
-
 
     <script src="https://kit.fontawesome.com/6f42fc440c.js" crossorigin="anonymous"></script>
     <script src="script.js"></script>

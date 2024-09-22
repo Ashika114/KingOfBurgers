@@ -21,7 +21,7 @@ require_once "config.php";
     <nav class="nav-container">
         <ul>
             <ul>
-                <li class="brand"><img src="Assets/logo.png" alt="Music">King Of Burgers</li>
+                <li class="brand"><img src="Assets/logo2.png" alt="Burger">King Of Burgers</li>
             </ul>
             <ul class="right-ul">
                 <li><a href="index.php">Home</a></li>

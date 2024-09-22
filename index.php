@@ -20,7 +20,7 @@ if(!(isset($_SESSION['admin']))){
     <nav class="nav-container">
         <ul>
             <ul>
-                <li class="brand"><img src="Assets/logo1.png" alt="Music">King Of Burgers</li>
+                <li class="brand"><img src="Assets/logo2.png" alt="Burger">King Of Burgers</li>
             </ul>
             <ul class="right-ul">
                 <li><a id="active" href="index.php">Home</a></li>
@@ -43,10 +43,10 @@ if(!(isset($_SESSION['admin']))){
     </nav>
     <div class="container">
         <section class="banner">
-            <img src="Assets/bg.png" alt="1">
+            <img src="Assets/bg1.jpg" alt="Background Image">
         </section>
         <section class="slogan">
-            <h1>Get Burgers<br>Like Nowhere<br>Else!!</h1>
+            <h1>Bite Into<br>Unmatched Flavor<br>Every Time!</h1>
         </section>
         <section class="speciality">
             <div class="speciality-content">
