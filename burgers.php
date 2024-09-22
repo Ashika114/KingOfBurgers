@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <nav class="nav-container">
         <ul>
-            <li class="brand"><img src="Assets/logo.png" alt="Music">Burger Mania</li>
+            <li class="brand"><img src="Assets/logo.png" alt="Music">King Of Burgers</li>
             <ul class="right-ul">
                 <li><a href="index.php">Home</a></li>
                 <li><a href="sales.php">Sales</a></li>

@@ -142,7 +142,7 @@ if(isset($_POST["paymentdone"])){
     <nav class="nav-container">
         <ul>
             <ul>
-                <li class="brand"><img src="Assets/logo.png" alt="Music">Burger Mania</li>
+                <li class="brand"><img src="Assets/logo.png" alt="Music">King Of Burgers</li>
             </ul>
             <ul class="right-ul">
                 <li><a id="active" href="payment.php">Payment</a></li>

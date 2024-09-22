@@ -103,7 +103,7 @@ if(($totPrice>0)){
     <nav class="nav-container">
         <ul>
             <ul>
-                <li class="brand"><img src="Assets/logo.png" alt="Music">Burger Mania</li>
+                <li class="brand"><img src="Assets/logo.png" alt="Music">King Of Burgers</li>
             </ul>
             <ul class="right-ul">
                 <li><a href="index.php">Home</a></li>
