@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 22, 2024 at 03:52 PM
+-- Generation Time: Oct 06, 2024 at 05:56 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -30,7 +30,6 @@ SET time_zone = "+00:00";
 CREATE TABLE `fooditems` (
   `id` int(11) NOT NULL,
   `itemName` varchar(255) NOT NULL,
-  `itemType` varchar(10) NOT NULL,
   `price` int(11) NOT NULL,
   `discountedPrice` int(11) NOT NULL,
   `filePath` varchar(255) NOT NULL
@@ -40,9 +39,13 @@ CREATE TABLE `fooditems` (
 -- Dumping data for table `fooditems`
 --
 
-INSERT INTO `fooditems` (`id`, `itemName`, `itemType`, `price`, `discountedPrice`, `filePath`) VALUES
-(16, 'Whopper', 'Veg', 200, 0, 'uploads/Whopper.png'),
-(17, 'Whopper', 'Non-Veg', 400, 0, 'uploads/Whopper Jr.png');
+INSERT INTO `fooditems` (`id`, `itemName`, `price`, `discountedPrice`, `filePath`) VALUES
+(19, 'Chocolate Cake ', 300, 0, 'uploads/2Cake.png'),
+(20, 'Pastry', 50, 10, 'uploads/5 Cake.png'),
+(21, 'Strawberry Cake', 500, 0, 'uploads/3 Cake.png'),
+(22, 'Red velvet cake', 600, 50, 'uploads/red-velvet.png'),
+(23, 'Cheese Cake', 1200, 0, 'uploads/cheesecake.png'),
+(24, 'Cup Cake', 20, 0, 'uploads/cupcake.png');
 
 -- --------------------------------------------------------
 
@@ -65,8 +68,9 @@ CREATE TABLE `loginform` (
 --
 
 INSERT INTO `loginform` (`id`, `fullname`, `username`, `email`, `password`, `admin`, `created_at`) VALUES
-(1, 'Admin', 'admin', 'admin@obos.com', '$2y$10$SWWKKsCCjtAT6P0okscHaeyAeuFf8Jr2J3l7tnnTiKlf39fI8B6Wi', 'YES', '2021-11-25 16:20:53'),
-(2, 'Dev', 'dev123', 'dev@gmail.com', '$2y$10$MrLtJmOPl5DSbJSG199jSeA09Z1dICF.S9E1l94rSOJkXa79Z7S8e', 'NO', '2024-09-21 19:37:24');
+(2, 'Dev', 'dev123', 'dev@gmail.com', '$2y$10$MrLtJmOPl5DSbJSG199jSeA09Z1dICF.S9E1l94rSOJkXa79Z7S8e', 'NO', '2024-09-21 19:37:24'),
+(4, 'Ashika Patel', 'ashika', 'patel.ashika28@yahoo.in', '$2y$10$QcBG2zVVmJb4Obiu.Lyblem680YDa6p38.ZF0ZueiP5X3ZXInBiqW', 'NO', '2024-10-05 10:17:20'),
+(5, 'Admin', 'admin', 'admin@cakehaven.com', '$2y$10$zWONqYZQckdUgmulUqvB2eVmcyQY1AwZGye.EdQVP69ch//Yj6M0K', 'YES', '2024-10-05 10:28:06');
 
 -- --------------------------------------------------------
 
@@ -93,8 +97,8 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `fullname`, `username`, `order_id`, `item`, `quantity`, `email`, `address`, `details`, `order_time`, `price`) VALUES
-(1, 'dev Patel', 'dev123', '21092024035252', 'Whopper Non-Veg, Whopper Veg, ', '10, 1, ', 'dev@gmail.com', '123 Patel Street Navsari', 'Delivered', '2024-09-21 21:22:52', 2106),
-(2, 'dev', 'dev123', '22092024123918', 'Whopper, ', '1, ', 'patel.ashika28@yahoo.in', '123 Patel Street Navsari', 'Confirmed', '2024-09-22 03:39:18', 216);
+(3, 'Test Full', 'ashika', '06102024071027', 'Chocolate Cake , ', '1, ', 'test@gmail.com', 'Test Address Navsari', 'Delivered', '2024-10-05 22:10:27', 324),
+(4, 'Test Full', 'ashika', '06102024071123', 'Chocolate Cake , ', '1, ', 'test@gmail.com', 'Test Address Navsari', 'Delivered', '2024-10-05 22:11:23', 324);
 
 --
 -- Indexes for dumped tables
@@ -130,19 +134,19 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `fooditems`
 --
 ALTER TABLE `fooditems`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `loginform`
 --
 ALTER TABLE `loginform`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
