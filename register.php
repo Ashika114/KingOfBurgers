@@ -145,7 +145,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Burger Ordering System</title>
+    <title>Online Cake Ordering System</title>
     <link rel="icon" href="Assets/logo.png">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -153,7 +153,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     <nav class="nav-container">
         <ul>
             <ul>
-                <li class="brand"><img src="Assets/logo2.png" alt="Burger">King Of Burgers</li>
+                <li class="brand"><img src="Assets/1Cake.png" alt="Cake">Cake Haven</li>
             </ul>
             <ul class="right-ul">
                 <li><a href="index.php">Home</a></li>
@@ -164,19 +164,19 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     </nav>
     <div class="container">
         <form action="" method="post">
-            <section class="register-page">
+            <section class="register-page" style="border: 2px solid #ccc; margin: 10px 250px; border-radius: 20px; background: #BBE9FF; padding: 30px 0px;">
                 <div class="register-input">
                     <div class="register-details">
                         <label for="fullname">Full Name</label> <span style="color:red;"><?php echo $fullname_err;?></span>
-                        <input type="text" class="form-control" name="fullname" id="fullname" placeholder="Tony Stark">
+                        <input type="text" class="form-control" name="fullname" id="fullname" placeholder="Enter Your Name">
                     </div>
                     <div class="register-details">
                         <label for="email">Email</label> <span style="color:red;"><?php echo $email_err;?></span>
-                        <input type="email" class="form-control" name="email" id="email" placeholder="billionare@avengers.com">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Enter Email Address">
                     </div>
                     <div class="register-details">
                         <label for="username">Username</label> <span style="color:red;"><?php echo $username_err;?></span>
-                        <input type="text" class="form-control" name="username" id="username" placeholder="thebillionare">
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Enter Username">
                     </div>
                     <div class="register-details">
                         <label for="password">Password</label> <span style="color:red;"><?php echo $password_err;?></span>
@@ -189,8 +189,14 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
                     <span style="color:red;"><?php echo $err;?></span>
                 </div>
             </section>
+            
         </form>
     </div>
+
+    <div class="bottom-right-image">
+        <img src="Assets/1Cake.png" alt="Cake Image"> <!-- Replace with your image source -->
+    </div>
+    
     <script src="https://kit.fontawesome.com/6f42fc440c.js" crossorigin="anonymous"></script>
     <script src="script.js"></script>
 </body>

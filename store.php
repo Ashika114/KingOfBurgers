@@ -84,7 +84,7 @@ if ($totPrice > 0) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Burger Ordering System</title>
+    <title>Online Cake Ordering System</title>
     <link rel="icon" href="Assets/logo.png">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -92,7 +92,8 @@ if ($totPrice > 0) {
     <nav class="nav-container">
         <ul>
             <ul>
-                <li class="brand"><img src="Assets/logo.png" alt="Burger">Burger Mania</li>
+                
+            <li class="brand"><img src="Assets/1Cake.png" alt="Cake">Cake Haven</li>
             </ul>
             <ul class="right-ul">
                 <li><a href="index.php">Home</a></li>
@@ -114,19 +115,21 @@ if ($totPrice > 0) {
         <div class="food-items">
             <?php foreach ($groupedItems as $itemName => $items): ?>
                 <div class="food">
-                    <div class="food-details">
+                    <div class="food-details" style="width: 500px;">
                         <h3><?php echo htmlspecialchars($itemName); ?></h3>
                         <ul>
                             <?php foreach ($items as $item): ?>
-                                <li style="display: flex; align-items: center; color: <?php echo (strtolower($item['itemType']) === 'veg') ? 'green' : 'red'; ?>;">
+                                <li style="display: flex; align-items: center;">
                                     <?php if (!empty($item['filePath'])): ?>
                                         <img src="<?php echo htmlspecialchars($item['filePath']); ?>" alt="<?php echo htmlspecialchars($item['itemName']); ?>" style="width: 80px; height: auto; margin-right: 10px;">
                                     <?php else: ?>
                                         <span>No image available</span>
                                     <?php endif; ?>
                                     <input class="food-quantity" type="number" name="<?php echo $item['id']; ?>" min="0" max="10" value="0" >
-                                    <span style="margin-left: 10px;">Price: Rs. <span><?php echo htmlspecialchars($item['price']); ?></span></span>
-                                    <span style="margin-left: 10px;">Discounted Price: Rs. <span><?php echo htmlspecialchars($item['discountedPrice']); ?></span></span>
+                                    <div class="newLine">
+                                    <span style="margin-left: 10px;">Price: Rs. <b><span><?php echo htmlspecialchars($item['price']); ?></span></b></span><br>
+                                    <div style="margin-left: 10px; margin-top: 8px;">Discounted Price: Rs.  <b><span><?php echo htmlspecialchars($item['discountedPrice']); ?></b></span></div>
+                                    </div>
                                 </li>
                             <?php endforeach; ?>
                         </ul>
@@ -150,6 +153,10 @@ if ($totPrice > 0) {
         </div>    
     </form>
 </div>
+
+<div class="bottom-right-image">
+        <img src="Assets/1Cake.png" alt="Cake Image"> <!-- Replace with your image source -->
+    </div>
 
 <script src="https://kit.fontawesome.com/6f42fc440c.js" crossorigin="anonymous"></script>
 <script src="script.js"></script>

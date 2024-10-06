@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Open+Sans&family=Ubuntu&display=swap');
 
 body{
-    background-color: rgb(196, 200, 238);
+    background-color: #C8ACD6;
 }
 
 *{
@@ -32,6 +32,7 @@ body{
 
 .nav-container{
     font-family: 'Ubuntu', sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
 }
 
@@ -40,8 +41,9 @@ nav ul{
     align-items: center;
     list-style-type: none;
     height: 60px;
-    background-color: rgb(30, 66, 87);
+    background-color: black;
     color: white;
+    /* background: linear-gradient(90deg, #1B2A41 0%, #0C1821 100%); */
     width: 100%;
     float: left;
 }
@@ -51,11 +53,13 @@ nav ul li{
 }
 
 .right-ul{
-    justify-content: right;
+    justify-content: left;
+    margin-left: -400px;
 }
 
 .right-ul li{
     cursor: pointer;
+    padding: 0 10px;
 }
 
 .right-ul li a{
@@ -103,10 +107,11 @@ nav ul li{
 }
 
 .slogan h1{
-    text-align: center;
+    text-align: right;
     font-size: 7vw;
-    margin: 10px 23px;
-    background: -webkit-linear-gradient(-90deg, lightgreen 5%, skyblue 53%, lightblue 55%);
+    margin: 470px 23px;
+    /* background: -webkit-linear-gradient(-90deg, lightgreen 5%, skyblue 53%, lightblue 55%); */
+    background: white;
     /*-webkit-background-clip: text;
     background-clip: text;
     -webkit-text-stroke: 4px transparent;
@@ -211,13 +216,13 @@ nav ul li{
     text-decoration: none;
     color: white;
     padding: 5px 10px;
-    background: blue;
+    background: #EE4266;
     border: 1px solid black;
     border-radius: 5px;
 }
 
 .cart-details button:hover, .payment-page button:hover, .to-cart button:hover, .login-btn button:hover, .register-btn button:hover{
-    background: rgb(2, 2, 170);
+    background: rgb(143, 59, 84);
     transform: translate3d(0, -2px, 0);
     cursor: pointer;
 }
@@ -277,7 +282,7 @@ nav ul li{
 
 .register-input{
     justify-content: center;
-    display: grid;
+    /* display: grid; */
     grid-template-columns: auto auto;
 }
 
@@ -370,7 +375,7 @@ nav ul li{
 }
 
 .food-items {
-    display: flex;
+    display: grid;
     flex-direction: column; /* Stack the food items vertically */
 }
 
@@ -395,7 +400,7 @@ nav ul li{
 }
 
 .to-cart1 button {
-    background-color: #00a2ff; /* Green background */
+    background-color: #EE4266; /* Green background */
     color: white; /* White text */
     border: none; /* No border */
     padding: 10px 20px; /* Top and bottom padding, left and right padding */
@@ -415,7 +420,7 @@ nav ul li{
 
 button {
     padding: 10px 20px; /* Add padding to the button */
-    background-color: #28a745; /* Green background */
+    background-color: #EE4266; 
     color: white; /* White text */
     border: none; /* Remove default border */
     border-radius: 5px; /* Rounded corners */
@@ -423,7 +428,7 @@ button {
 }
 
 button:hover {
-    background-color: #218838; /* Darker green on hover */
+    background-color: #bb596e; /* Darker green on hover */
 }
 
 /* Modal styles */
@@ -497,6 +502,18 @@ button:hover {
     margin-bottom: 15px; /* Space below the message */
     font-weight: bold; /* Bold text */
     text-align: center; /* Centered text */
+}
+
+.bottom-right-image {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.bottom-right-image img {
+    width: 100px; /* Adjust the width */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 0%; /* Optional: Make the image circular */
 }
 
 

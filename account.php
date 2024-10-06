@@ -13,7 +13,7 @@ require_once "config.php";
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Burger Ordering System</title>
+    <title>Online Cake Ordering System</title>
     <link rel="icon" href="Assets/logo.png">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -21,12 +21,19 @@ require_once "config.php";
     <nav class="nav-container">
         <ul>
             <ul>
-                <li class="brand"><img src="Assets/logo2.png" alt="Burger">King Of Burgers</li>
+                <li class="brand"><img src="Assets/1Cake.png" alt="Cake">Cake Haven</li>
             </ul>
             <ul class="right-ul">
                 <li><a href="index.php">Home</a></li>
-                <li><a href="store.php">Store</a></li>
-                <li><a href="cart.php">Cart</a></li>
+                <?php if ($_SESSION["admin"] == "YES") { ?>
+                    <li><a href="sales.php">Sales</a></li>
+                    <li><a href="cake.php">Cakes</a></li>
+                <?php } else { ?>
+                    <li><a href="store.php">Store</a></li>
+                    <li><a href="cart.php">Cart</a></li>
+                <?php } ?>
+                <!-- <li><a href="store.php">Store</a></li>
+                <li><a href="cart.php">Cart</a></li> -->
                 <li><a id="active" href="account.php">Account</a></li>
                 <li><a href="logout.php">Logout</a></li>
             </ul>
@@ -115,6 +122,9 @@ require_once "config.php";
             <?php }?>
         </section>
         </form>
+    </div>
+    <div class="bottom-right-image">
+        <img src="Assets/1Cake.png" alt="Cake Image"> <!-- Replace with your image source -->
     </div>
     <script src="https://kit.fontawesome.com/6f42fc440c.js" crossorigin="anonymous"></script>
     <script src="script.js"></script>

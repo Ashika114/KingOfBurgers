@@ -19,7 +19,7 @@ require_once "config.php";
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Burger Ordering System</title>
+    <title>Online Cake Ordering System</title>
     <link rel="icon" href="Assets/logo.png">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -27,12 +27,12 @@ require_once "config.php";
     <nav class="nav-container">
         <ul>
             <ul>
-                <li class="brand"><img src="Assets/logo2.png" alt="Burger">King Of Burgers</li>
+                <li class="brand"><img src="Assets/1Cake.png" alt="Cake">Cake Haven</li>
             </ul>
             <ul class="right-ul">
                 <li><a href="index.php">Home</a></li>
                 <li><a id="active" href="sales.php">Sales</a></li>
-                <li><a href="burgers.php">Burgers</a></li>
+                <li><a href="cake.php">Cakes</a></li>
                 <li><a href="account.php">Account</a></li>
                 <li><a href="logout.php">Logout</a></li>
             </ul>
@@ -85,8 +85,14 @@ require_once "config.php";
                                         <td style="border: 1px solid black; padding: 10px;"><?php echo $ord["email"];?></td>
                                         <td style="border: 1px solid black; padding: 10px;"><?php echo $ord["address"];?></td>
                                         <td style="border: none;">
-                                            <a style="color: black; text-decoration: none;" onmouseover="style='color: blue; text-decoration: none;'"return; onmouseout="style='color: black; text-decoration: none;'"return; href="outForDelivery.php?order_id=<?=$ord['order_id']?>"><i class="fas fa-truck"></i></a>
+                                            <a href="outForDelivery.php?order_id=<?=$ord['order_id']?>" 
+                                            style="display: inline-block; background-color: black; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; text-align: center; font-size: 14px; cursor: pointer;" 
+                                            onmouseover="this.style.backgroundColor='blue'; this.style.color='white';" 
+                                            onmouseout="this.style.backgroundColor='black'; this.style.color='white';">
+                                                Out for Delivery   <i class="fas fa-truck"></i>
+                                            </a>
                                         </td>
+
                             <?php 
                                 endwhile; 
                             endif; ?>
@@ -137,8 +143,14 @@ require_once "config.php";
                                         <td style="border: 1px solid black; padding: 10px;"><?php echo $ord["email"];?></td>
                                         <td style="border: 1px solid black; padding: 10px;"><?php echo $ord["address"];?></td>
                                         <td style="border: none;">
-                                            <a style="color: black; text-decoration: none;" onmouseover="style='color: blue; text-decoration: none;'"return; onmouseout="style='color: black; text-decoration: none;'"return; href="delivered.php?order_id=<?=$ord['order_id']?>"><i class="fas fa-truck-loading"></i></a>
+                                            <a href="delivered.php?order_id=<?=$ord['order_id']?>" 
+                                            style="display: inline-block; background-color: black; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; text-align: center; font-size: 14px; cursor: pointer;" 
+                                            onmouseover="this.style.backgroundColor='blue'; this.style.color='white';" 
+                                            onmouseout="this.style.backgroundColor='black'; this.style.color='white';">
+                                                Order Confirmed  <i class="fas fa-truck-loading"></i>
+                                            </a>
                                         </td>
+
                             <?php 
                                 endwhile; 
                             endif; ?>
@@ -198,6 +210,10 @@ require_once "config.php";
         </section>
         </form>
     </div>
+    <div class="bottom-right-image">
+        <img src="Assets/1Cake.png" alt="Cake Image"> <!-- Replace with your image source -->
+    </div>
+    
     <script src="https://kit.fontawesome.com/6f42fc440c.js" crossorigin="anonymous"></script>
     <script src="script.js"></script>
 </body>

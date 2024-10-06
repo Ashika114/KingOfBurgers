@@ -41,7 +41,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Burger Ordering System</title>
+    <title>Online Cake Ordering System</title>
     <link rel="icon" href="Assets/logo.png">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -49,7 +49,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     <nav class="nav-container">
         <ul>
             <ul>
-                <li class="brand"><img src="Assets/logo2.png" alt="Burger">King Of Burgers</li>
+                <li class="brand"><img src="Assets/1Cake.png" alt="Cake">Cake Haven</li>
             </ul>
             <ul class="right-ul">
                 <li><a href="index.php">Home</a></li>
@@ -106,7 +106,10 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
             </section>
         </form>
     </div>
-
+    <div class="bottom-right-image">
+        <img src="Assets/1Cake.png" alt="Cake Image"> <!-- Replace with your image source -->
+    </div>
+    
     <script src="https://kit.fontawesome.com/6f42fc440c.js" crossorigin="anonymous"></script>
     <script src="script.js"></script>
 </body>
